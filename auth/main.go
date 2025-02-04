@@ -1,8 +1,15 @@
 package main
 
-var {
+import (
+	"flag"
+	"log"
+	"github.com/joho/godotenv"
+	"microservice-go/db"
+)
+
+var (
 	local bool
-}
+)
 
 func init() {
 	flag.BoolVar(&local, "local", true, "Run server in local mode")
@@ -13,7 +20,7 @@ func main() {
 	if local {
 		err := godotenv.Load()
 		if err != nil {
-			log.Panic(err)
+			log.Panicln(err)
 		}
 	}
 
@@ -24,4 +31,6 @@ func main() {
 	}
 	
 	defer conn.Close()
+
+
 }
